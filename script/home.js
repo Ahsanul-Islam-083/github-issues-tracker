@@ -52,7 +52,19 @@ const issueLoader = async () => {
     displayIssus(allIssues);
 }
 
+const searchIssuesLoader = async (value) => {
+    manageLoading(true);
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`);
+    const data = await res.json();
+    manageLoading(false);
+    console.log(data);
+    searchIssues = data.data
+    console.log(searchIssues);
+    displayIssus(searchIssues)
+    issueCount.innerText = searchIssues.length;
+    
 
+}
 
 searchBtn.addEventListener("click", () => {
     searchIssuesLoader(searchInput.value);
