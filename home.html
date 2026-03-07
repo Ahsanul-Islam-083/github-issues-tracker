@@ -157,7 +157,61 @@
 
         <!-- Open the modal using ID.showModal() method -->
         <!-- <button class="btn" onclick="issueModal.showModal()">open modal</button> -->
+        <dialog id="issueModal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <h2 id="modalTitle" class="text-3xl font-bold mb-3">Fix broken image uploads</h2>
+                <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+                    <span id="modalBadge" class="badge badge-success badge-lg text-white">
+                        Opened
+                    </span>
 
+                    <span>•</span>
+                    <span>Opened by<span id="modalOwned">Fahim Ahmed</span> </span>
+
+                    <span>•</span>
+                    <span id="modalDate">22/02/2026</span>
+                </div>
+                <div id="modalBadge" class="flex gap-3 mb-6">
+
+                    <span class="badge badge-soft badge-warning gap-1">
+                        HELP WANTED
+                    </span>
+                    <span class="badge badge-soft badge-warning gap-1">
+                        HELP WANTED
+                    </span>
+
+                </div>
+
+                <p id="modalDescription" class="text-gray-500 mb-6 leading-relaxed">
+                    The navigation menu doesn't collapse properly on mobile devices.
+                    Need to fix the responsive behavior.
+                </p>
+                <div class="bg-base-200 rounded-lg p-6 grid grid-cols-2 gap-10 mb-6">
+
+                    <div>
+                        <p class="text-gray-500 mb-1">Assignee:</p>
+                        <p id="modalAssignee" class="font-semibold text-lg">
+                            Fahim Ahmed
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-500 mb-1">Priority:</p>
+
+                        <span id="modalPriority" class="badge badge-error badge-lg text-white">
+                            HIGH
+                        </span>
+                    </div>
+
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn btn-primary">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
 
         <section id="loadingSpinner"
             class="bg-base-200 rounded-b-lg h-96 w-full flex justify-center items-center hidden">
