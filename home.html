@@ -1,129 +1,109 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="./assets/github-logo.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon" />
 
     <!-- Tailwind & DaisyUi -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@5"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- FontAwesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- GoogleFont -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
 
     <title>Home | GitHub Issue Tracker</title>
     <link rel="stylesheet" href="./style.css" />
-  </head>
+</head>
 
-  <body>
+<body>
     <header class="bg-base-100 shadow-sm">
-      <div class="w-[95%] mx-auto navbar">
-        <div class="flex-1">
-          <div class="flex items-center gap-2 cursor-pointer">
-            <img class="w-9 h-[37px]" src="./assets/github-logo.png" alt="" />
-            <a class="text-2xl font-semibold">GitHub Issues Tracker</a>
-          </div>
-        </div>
-        <div class="flex gap-2">
-          <div class="join">
-            <div>
-              <label class="input validator join-item">
-                <svg
-                  class="h-[1em] opacity-50"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke-width="2.5"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                  </g>
-                </svg>
-                <input type="email" placeholder="Search issues..." required />
-              </label>
+        <div class="w-[95%] mx-auto navbar">
+            <div class="flex-1">
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <img class="w-9 h-[37px]" src="./assets/github-logo.png" alt="" />
+                    <a class="text-2xl font-semibold">GitHub Issues Tracker</a>
+                </div>
             </div>
-            <button class="btn btn-primary join-item">Search</button>
-          </div>
-          <div class="dropdown dropdown-end">
-            <a href="/index.html" class="btn btn-primary btn-outline">
-              <i class="fa-solid fa-arrow-right-from-bracket rotate-180"></i>Log
-              Out
-            </a>
-          </div>
+            <div class="flex gap-2">
+                <div class="join">
+                    <div>
+                        <label class="input validator join-item">
+                            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                                    stroke="currentColor">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.3-4.3"></path>
+                                </g>
+                            </svg>
+                            <input id="searchInput" type="text" placeholder="Search issues..." />
+                        </label>
+                    </div>
+                    <button id="searchBtn" class="btn btn-primary join-item">
+                        Search
+                    </button>
+                </div>
+                <div class="dropdown dropdown-end">
+                    <a href="/index.html" class="btn btn-primary btn-outline">
+                        <i class="fa-solid fa-arrow-right-from-bracket rotate-180"></i>Log
+                        Out
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
 
     <main class="w-9/12 mx-auto mt-14">
-      <!-- button section -->
-      <section id="separatorBtn"
-        class="bg-base-200 p-6 rounded-lg flex gap-2 justify-center md:justify-start flex-wrap"
-      >
-        <button id="all" class="toggleBtn btn btn-primary">All</button>
-        <button id="open" class="toggleBtn btn btn-primary btn-outline">Open</button>
-        <button id="close" class="toggleBtn btn btn-primary btn-outline">Closed</button>
-      </section>
+        <!-- button section -->
+        <section id="separatorBtn"
+            class="bg-base-200 p-6 rounded-lg flex gap-2 justify-center md:justify-start flex-wrap">
+            <button id="all" class="toggleBtn btn btn-primary">All</button>
+            <button id="open" class="toggleBtn btn btn-primary btn-outline">
+                Open
+            </button>
+            <button id="close" class="toggleBtn btn btn-primary btn-outline">
+                Closed
+            </button>
+        </section>
 
-      <!-- Count Issues -->
-      <section
-        class="bg-base-200 flex justify-between items-center p-6 mt-4 rounded-t-lg border-b border-gray-200"
-      >
-        <div class="flex items-center gap-2">
-          <button class="btn btn-circle">
-            <img src="./assets/Aperture.png" alt="" />
-          </button>
-          <div>
-            <h3 class="text-xl font-semibold">
-              <span id="issueCount">50</span> Issues
-            </h3>
-            <p class="text-gray-400">Track and manage your project issues</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-4">
-          <div class="flex items-center gap-2">
-            <span class="badge bg-green-600 badge-xs"></span>
-            <span class="text-sm font-medium">Open</span>
-          </div>
+        <!-- Count Issues -->
+        <section class="bg-base-200 flex justify-between items-center p-6 mt-4 rounded-t-lg border-b border-gray-200">
+            <div class="flex items-center gap-2">
+                <button class="btn btn-circle">
+                    <img src="./assets/Aperture.png" alt="" />
+                </button>
+                <div>
+                    <h3 class="text-xl font-semibold">
+                        <span id="issueCount">50</span> Issues
+                    </h3>
+                    <p class="text-gray-400">Track and manage your project issues</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="badge bg-green-600 badge-xs"></span>
+                    <span class="text-sm font-medium">Open</span>
+                </div>
 
-          <div class="flex items-center gap-2">
-            <span class="badge bg-purple-600 badge-xs"></span>
-            <span class="text-sm font-medium">Closed</span>
-          </div>
-        </div>
-      </section>
+                <div class="flex items-center gap-2">
+                    <span class="badge bg-purple-600 badge-xs"></span>
+                    <span class="text-sm font-medium">Closed</span>
+                </div>
+            </div>
+        </section>
 
-      <!-- issues Card container -->
-      <section id="issueContainer" class="bg-base-200 rounded-b-lg grid-cols-1 sm:grid-cols-2 grid md:grid-cols-3 xl:grid-cols-4 p-6 gap-3">
-
-        <!-- <div class="card bg-base-100 shadow-md border-t-4 border-green-500 p-4">
+        <!-- issues Card container -->
+        <section id="issueContainer"
+            class="bg-base-200 rounded-b-lg grid-cols-1 sm:grid-cols-2 grid md:grid-cols-3 xl:grid-cols-4 p-6 gap-3">
+            <!-- <div class="card bg-base-100 shadow-md border-t-4 border-green-500 p-4">
           <div class="flex justify-between items-start">
             <img src="./assets/Open-Status.png" class="w-6 h-6" alt="status" />
 
@@ -173,54 +153,55 @@
             </div>
           </div>
         </div> -->
+        </section>
+
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="issueModal.showModal()">open modal</button> -->
 
 
-      </section>
-
-      <section id="loadingSpinner" class="bg-base-200 rounded-b-lg h-96 w-full flex justify-center items-center hidden">
-        <span class="loading loading-dots loading-xl"></span>
-      </section>
+        <section id="loadingSpinner"
+            class="bg-base-200 rounded-b-lg h-96 w-full flex justify-center items-center hidden">
+            <span class="loading loading-dots loading-xl"></span>
+        </section>
     </main>
 
     <footer class="bg-base-200">
-<footer class="w-9/12 mx-auto mt-14 footer sm:footer-horizontal text-base-content p-10 ">
-  <nav>
-    <h6 class="footer-title">Services</h6>
-    <a class="link link-hover">Branding</a>
-    <a class="link link-hover">Design</a>
-    <a class="link link-hover">Marketing</a>
-    <a class="link link-hover">Advertisement</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Company</h6>
-    <a class="link link-hover">About us</a>
-    <a class="link link-hover">Contact</a>
-    <a class="link link-hover">Jobs</a>
-    <a class="link link-hover">Press kit</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Legal</h6>
-    <a class="link link-hover">Terms of use</a>
-    <a class="link link-hover">Privacy policy</a>
-    <a class="link link-hover">Cookie policy</a>
-  </nav>
-  <form>
-    <h6 class="footer-title">Newsletter</h6>
-    <fieldset class="w-80">
-      <label>Enter your email address</label>
-      <div class="join">
-        <input
-          type="text"
-          placeholder="username@site.com"
-          class="input input-bordered join-item" />
-        <button class="btn btn-primary join-item">Subscribe</button>
-      </div>
-    </fieldset>
-  </form>
-</footer>
+        <footer class="w-9/12 mx-auto mt-14 footer sm:footer-horizontal text-base-content p-10">
+            <nav>
+                <h6 class="footer-title">Services</h6>
+                <a class="link link-hover">Branding</a>
+                <a class="link link-hover">Design</a>
+                <a class="link link-hover">Marketing</a>
+                <a class="link link-hover">Advertisement</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Company</h6>
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+                <a class="link link-hover">Press kit</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Legal</h6>
+                <a class="link link-hover">Terms of use</a>
+                <a class="link link-hover">Privacy policy</a>
+                <a class="link link-hover">Cookie policy</a>
+            </nav>
+            <form>
+                <h6 class="footer-title">Newsletter</h6>
+                <fieldset class="w-80">
+                    <label>Enter your email address</label>
+                    <div class="join">
+                        <input type="text" placeholder="username@site.com" class="input input-bordered join-item" />
+                        <button class="btn btn-primary join-item">Subscribe</button>
+                    </div>
+                </fieldset>
+            </form>
+        </footer>
     </footer>
 
     <script src="./script/login.js"></script>
     <script src="./script/home.js"></script>
-  </body>
+</body>
+
 </html>
