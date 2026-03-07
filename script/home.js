@@ -106,7 +106,7 @@ const displayIssus = (data) => {
     data.forEach(issue => {
         const card = document.createElement('div');
         card.onclick = () => selectedCardDetails(issue.id);
-        card.className = `card bg-base-100 shadow-md border-t-4 ${issue.status == 'open' ? 'border-green-500' : 'border-purple-600'} p-4`;
+        card.className = `card bg-base-100 shadow-md border-t-4 ${issue.status == 'open' ? 'border-green-500' : 'border-purple-600'} p-4 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-xl active:scale-95`;
 
         card.innerHTML = `
               <div class="flex justify-between items-start">
