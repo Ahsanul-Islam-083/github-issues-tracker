@@ -20,7 +20,12 @@ const modalDate = document.getElementById("modalDate");
 
 
 let allIssues = [];
-let searchIssues =[];
+let searchIssues = [];
+
+const formatName = (name) => {
+   const clearName = name.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+   return clearName;
+};
 
 const createTags = (arr) => {
     const badges = arr.map(item => `<span class="badge badge-soft border-warning badge-warning text-xs rounded-full">${item}</span>`);
@@ -62,7 +67,7 @@ const searchIssuesLoader = async (value) => {
     console.log(searchIssues);
     displayIssus(searchIssues)
     issueCount.innerText = searchIssues.length;
-    
+
 
 }
 
@@ -70,15 +75,29 @@ searchBtn.addEventListener("click", () => {
     searchIssuesLoader(searchInput.value);
     toggleActiveBtn();
     console.log(searchInput.value);
-    searchInput.value="";
+    searchInput.value = "";
 
 })
 
 const selectedCardDetails = async (id) => {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
-    console.log(data);
+    console.log(data.data);
+    const details = data.data
     issueModal.showModal();
+    modalTitle.innerText = details.title;
+    modalStatus.innerText = details.status;
+    modalStatus.classList.remove("badge-success", "badge-secondary");
+    details.status === "open" ? modalStatus.classList.add('badge-success') : modalStatus.classList.add('badge-secondary');
+    modalOwned.innerText = formatName(details.author);
+    modalDate.innerText = new Date(details.createdAt).toLocaleDateString();
+    modalBadge.innerHTML = `${createTags(details.labels)}`;
+    modalDescription.innerText = details.description;
+    details.assignee ? modalAssignee.innerText =formatName(details.assignee) :modalAssignee.innerText = "Unassigned";
+    modalPriority.innerText = details.priority.toUpperCase();
+    modalPriority.classList.remove('badge-error', 'badge-warning', 'badge-info')
+    details.priority == 'high' ? modalPriority.classList.add('badge-error') : details.priority == 'medium' ? modalPriority.classList.add('badge-warning') : modalPriority.classList.add('badge-info');
+
 
 }
 
@@ -95,8 +114,8 @@ const displayIssus = (data) => {
 
 
             <!-- PRIORITY -->
-            <span class="badge ${issue.priority == 'high' ? 'badge-error' : issue.priority == 'medium' ? 'badge-warning' : 'badge-ghost'} badge-soft text-xs font-medium">
-              ${issue.priority}
+            <span class="badge ${issue.priority == 'high' ? 'badge-error' : issue.priority == 'medium' ? 'badge-warning' : 'badge-info'} badge-soft text-xs font-medium">
+              ${issue.priority.toUpperCase()}
             </span>
           </div>
 
@@ -120,14 +139,14 @@ const displayIssus = (data) => {
             <div
               class="flex justify-between items-center mt-4 border-t border-gray-200 pt-3"
             >
-              <p>#${issue.id} by ${issue.author}</p>
+              <p>#${issue.id} by ${formatName(issue.author)}</p>
 
               <p class="flex items-center gap-1 mt-1">${new Date(issue.createdAt).toLocaleDateString()}</p>
             </div>
             <div
               class="flex justify-between items-center"
             >
-              <p>Assignee: ${issue.assignee ? issue.assignee : 'Unassigned'}</p>
+              <p>Assignee: ${issue.assignee ? formatName(issue.assignee) : 'Unassigned'}</p>
 
               <p class="flex items-center gap-1 mt-1">
                 Update: ${new Date(issue.updatedAt).toLocaleDateString()}
