@@ -62,9 +62,9 @@ const searchIssuesLoader = async (value) => {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`);
     const data = await res.json();
     manageLoading(false);
-    console.log(data);
+    // console.log(data);
     searchIssues = data.data
-    console.log(searchIssues);
+    // console.log(searchIssues);
     displayIssus(searchIssues)
     issueCount.innerText = searchIssues.length;
 
@@ -74,7 +74,7 @@ const searchIssuesLoader = async (value) => {
 searchBtn.addEventListener("click", () => {
     searchIssuesLoader(searchInput.value);
     toggleActiveBtn();
-    console.log(searchInput.value);
+    // console.log(searchInput.value);
     searchInput.value = "";
 
 })
@@ -82,7 +82,7 @@ searchBtn.addEventListener("click", () => {
 const selectedCardDetails = async (id) => {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
-    console.log(data.data);
+    // console.log(data.data);
     const details = data.data
     issueModal.showModal();
     modalTitle.innerText = details.title;
@@ -165,7 +165,7 @@ const displayIssus = (data) => {
 
 
 separatorBtn.addEventListener("click", (e) => {
-    console.log(e.target);
+    // console.log(e.target);
     toggleActiveBtn();
     e.target.classList.remove("btn-outline");
 
@@ -174,14 +174,14 @@ separatorBtn.addEventListener("click", (e) => {
         issueCount.innerText = allIssues.length;
     } else if (e.target === openBtn) {
         const openIssues = allIssues.filter(issue => issue.status === "open");
-        console.log("open", openIssues);
+        // console.log("open", openIssues);
         issueCount.innerText = openIssues.length;
         displayIssus(openIssues);
     } else if (e.target === closeBtn) {
         const closedIssues = allIssues.filter(issue => issue.status === "closed");
         issueCount.innerText = closedIssues.length;
         displayIssus(closedIssues);
-        console.log("open", closedIssues);
+        // console.log("open", closedIssues);
     }
 
 })

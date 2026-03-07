@@ -26,14 +26,14 @@
 
 <body>
     <header class="bg-base-100 shadow-sm">
-        <div class="w-[95%] mx-auto navbar">
+        <div class="w-[95%] mx-auto navbar flex-col md:flex-row gap-1">
             <div class="flex-1">
                 <div class="flex items-center gap-2 cursor-pointer">
                     <img class="w-9 h-[37px]" src="./assets/github-logo.png" alt="" />
-                    <a class="text-2xl font-semibold">GitHub Issues Tracker</a>
+                    <a class="text-xl md:text-2xl font-semibold">GitHub Issues Tracker</a>
                 </div>
             </div>
-            <div class="flex gap-2">
+            <div class="flex flex-wrap-reverse justify-center gap-2">
                 <div class="join">
                     <div>
                         <label class="input validator join-item">
@@ -61,7 +61,7 @@
         </div>
     </header>
 
-    <main class="w-9/12 mx-auto mt-14">
+    <main class="md:w-9/12 mx-auto mt-14">
         <!-- button section -->
         <section id="separatorBtn"
             class="bg-base-200 p-6 rounded-lg flex gap-2 justify-center md:justify-start flex-wrap">
@@ -75,12 +75,12 @@
         </section>
 
         <!-- Count Issues -->
-        <section class="bg-base-200 flex justify-between items-center p-6 mt-4 rounded-t-lg border-b border-gray-200">
-            <div class="flex items-center gap-2">
+        <section class="bg-base-200 flex flex-wrap justify-center md:justify-between items-center p-6 mt-4 rounded-t-lg border-b border-gray-200">
+            <div class="flex flex-col md:flex-row items-center gap-2">
                 <button class="btn btn-circle">
                     <img src="./assets/Aperture.png" alt="" />
                 </button>
-                <div>
+                <div class="text-center md:text-start">
                     <h3 class="text-xl font-semibold">
                         <span id="issueCount">50</span> Issues
                     </h3>
@@ -103,64 +103,53 @@
         <!-- issues Card container -->
         <section id="issueContainer"
             class="bg-base-200 rounded-b-lg grid-cols-1 sm:grid-cols-2 grid md:grid-cols-3 xl:grid-cols-4 p-6 gap-3">
-            <!-- <div class="card bg-base-100 shadow-md border-t-4 border-green-500 p-4">
-          <div class="flex justify-between items-start">
-            <img src="./assets/Open-Status.png" class="w-6 h-6" alt="status" />
 
-           
-            <span class="badge badge-error badge-soft text-xs font-medium">
-              HIGH
-            </span>
-          </div>
+            <div class="flex justify-between items-start">
+                <img src="./assets/Open-Status.png" class="w-6 h-6" alt="status" />
 
-          
-          <h2 class="font-semibold text-sm mt-3 leading-snug">
-            Fix Navigation Menu On Mobile Devices
-          </h2>
 
-        
-          <p class="text-xs text-gray-400 mt-1">
-            The navigation menu doesn't collapse properly on mobile devices...
-          </p>
-
-          <div class="flex flex-wrap gap-1 mt-3">
-            <span
-              class="badge badge-soft border-warning badge-warning text-xs rounded-full"
-              >HELP WANTED</span
-            >
-            <span
-              class="badge badge-soft border-warning badge-warning text-xs rounded-full"
-              >HELP WANTED</span
-            >
-          </div>
-
-          <div class="text-xs text-gray-400">
-            <div
-              class="flex justify-between items-cente mt-4 border-t border-gray-200 pt-3"
-            >
-              <p>#1 by john_doe</p>
-
-              <p class="flex items-center gap-1 mt-1">1/15/2024</p>
+                <span class="badge badge-error badge-soft text-xs font-medium">
+                    HIGH
+                </span>
             </div>
-            <div
-              class="flex justify-between items-center"
-            >
-              <p>Assignee: jane_smith</p>
 
-              <p class="flex items-center gap-1 mt-1">
-                Update: 1/15/2024
-              </p>
+
+            <h2 class="font-semibold text-sm mt-3 leading-snug">
+                Fix Navigation Menu On Mobile Devices
+            </h2>
+
+
+            <p class="text-xs text-gray-400 mt-1">
+                The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+
+            <div class="flex flex-wrap gap-1 mt-3">
+                <span class="badge badge-soft border-warning badge-warning text-xs rounded-full">HELP WANTED</span>
+                <span class="badge badge-soft border-warning badge-warning text-xs rounded-full">HELP WANTED</span>
             </div>
-          </div>
-        </div> -->
+
+            <div class="text-xs text-gray-400">
+                <div class="flex justify-between items-cente mt-4 border-t border-gray-200 pt-3">
+                    <p>#1 by john_doe</p>
+
+                    <p class="flex items-center gap-1 mt-1">1/15/2024</p>
+                </div>
+                <div class="flex justify-between items-center">
+                    <p>Assignee: jane_smith</p>
+
+                    <p class="flex items-center gap-1 mt-1">
+                        Update: 1/15/2024
+                    </p>
+                </div>
+            </div>
+            </div> -->
         </section>
 
-        <!-- Open the modal using ID.showModal() method -->
-        <!-- <button class="btn" onclick="issueModal.showModal()">open modal</button> -->
+
         <dialog id="issueModal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box">
-                <h2 id="modalTitle" class="text-3xl font-bold mb-3">Fix broken image uploads</h2>
-                <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+                <h2 id="modalTitle" class=" text-xl md:text-3xl font-bold mb-3">Fix broken image uploads</h2>
+                <div class="flex items-center gap-1 md:gap-3 text-sm text-gray-500 mb-4">
                     <span id="modalStatus" class="badge badge-lg text-white">
                         Opened
                     </span>
@@ -173,20 +162,13 @@
                 </div>
                 <div id="modalBadge" class="flex gap-3 mb-6">
 
-                    <!-- <span class="badge badge-soft badge-warning gap-1">
-                        HELP WANTED
-                    </span>
-                    <span class="badge badge-soft badge-warning gap-1">
-                        HELP WANTED
-                    </span> -->
-
                 </div>
 
                 <p id="modalDescription" class="text-gray-500 mb-6 leading-relaxed">
                     The navigation menu doesn't collapse properly on mobile devices.
                     Need to fix the responsive behavior.
                 </p>
-                <div class="bg-base-200 rounded-lg p-6 grid grid-cols-2 gap-10 mb-6">
+                <div class="bg-base-200 rounded-lg p-2 md:p-6 grid grid-cols-2 gap-10 mb-6">
 
                     <div>
                         <p class="text-gray-500 mb-1">Assignee:</p>
@@ -220,7 +202,7 @@
     </main>
 
     <footer class="bg-base-200">
-        <footer class="w-9/12 mx-auto mt-14 footer sm:footer-horizontal text-base-content p-10">
+        <footer class="w-9/12 mx-auto mt-14 footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
             <nav>
                 <h6 class="footer-title">Services</h6>
                 <a class="link link-hover">Branding</a>
@@ -241,16 +223,6 @@
                 <a class="link link-hover">Privacy policy</a>
                 <a class="link link-hover">Cookie policy</a>
             </nav>
-            <form>
-                <h6 class="footer-title">Newsletter</h6>
-                <fieldset class="w-80">
-                    <label>Enter your email address</label>
-                    <div class="join">
-                        <input type="text" placeholder="username@site.com" class="input input-bordered join-item" />
-                        <button class="btn btn-primary join-item">Subscribe</button>
-                    </div>
-                </fieldset>
-            </form>
         </footer>
     </footer>
 
