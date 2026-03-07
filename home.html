@@ -84,12 +84,12 @@
 
     <main class="w-9/12 mx-auto mt-14">
       <!-- button section -->
-      <section
+      <section id="separatorBtn"
         class="bg-base-200 p-6 rounded-lg flex gap-2 justify-center md:justify-start flex-wrap"
       >
-        <button class="btn btn-primary">All</button>
-        <button class="btn btn-primary">Open</button>
-        <button class="btn btn-primary">Closed</button>
+        <button id="all" class="toggleBtn btn btn-primary">All</button>
+        <button id="open" class="toggleBtn btn btn-primary btn-outline">Open</button>
+        <button id="close" class="toggleBtn btn btn-primary btn-outline">Closed</button>
       </section>
 
       <!-- Count Issues -->
@@ -177,7 +177,7 @@
 
       </section>
 
-      <section class="bg-base-200 rounded-b-lg h-96 w-full flex justify-center items-center hidden">
+      <section id="loadingSpinner" class="bg-base-200 rounded-b-lg h-96 w-full flex justify-center items-center hidden">
         <span class="loading loading-dots loading-xl"></span>
       </section>
     </main>

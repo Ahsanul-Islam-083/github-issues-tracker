@@ -1,19 +1,39 @@
 const issueContainer = document.getElementById("issueContainer");
+const issueCount = document.getElementById("issueCount");
+const loadingSpinner = document.getElementById("loadingSpinner");
+const separatorBtn = document.getElementById("separatorBtn");
+const allBtn = document.getElementById("all")
+const openBtn = document.getElementById("open")
+const closeBtn = document.getElementById("close")
 
+let allIssues = [];
 
 const createTags = (arr) => {
     const badges = arr.map(item => `<span class="badge badge-soft border-warning badge-warning text-xs rounded-full">${item}</span>`);
     return (badges.join(" "));
 }
 
+const manageLoading = (status) => {
+    if (status == true) {
+        loadingSpinner.classList.remove("hidden");
+        issueContainer.innerHTML = "";
+    } else {
+        loadingSpinner.classList.add("hidden");
+    }
+};
+
 const issueLoader = async () => {
+    manageLoading(true);
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
-    console.log(data.data);
-    displayIssus(data.data);
+    manageLoading(false);
+    // console.log(data.data);
+    allIssues = data.data;
+    displayIssus(allIssues);
 }
 
 const displayIssus = (data) => {
+    issueContainer.innerHTML = "";
     data.forEach(issue => {
         const card = document.createElement('div');
         card.className = `card bg-base-100 shadow-md border-t-4 ${issue.status == 'open' ? 'border-green-500' : 'border-purple-600'} p-4`;
@@ -72,6 +92,33 @@ const displayIssus = (data) => {
 
 }
 
+const toggleActiveBtn = () => {
+    const allToggleBtn = document.querySelectorAll(".toggleBtn");
+    allToggleBtn.forEach(btn => btn.classList.add("btn-outline"));
+
+}
+
+separatorBtn.addEventListener("click", (e) => {
+    console.log(e.target);
+    toggleActiveBtn();
+    e.target.classList.remove("btn-outline");
+
+    if (e.target === allBtn) {
+        displayIssus(allIssues);
+        issueCount.innerText= allIssues.length;
+    } else if (e.target === openBtn) {
+        const openIssues = allIssues.filter(issue => issue.status === "open");
+        console.log("open", openIssues);
+        issueCount.innerText= openIssues.length;
+        displayIssus(openIssues);
+    } else if (e.target === closeBtn) {
+        const closedIssues = allIssues.filter(issue => issue.status === "closed");
+        issueCount.innerText= closedIssues.length;
+        displayIssus(closedIssues);
+        console.log("open", closedIssues);
+    }
+
+})
 
 
 
