@@ -23,92 +23,92 @@ let allIssues = [];
 let searchIssues = [];
 
 const formatName = (name) => {
-   const clearName = name.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-   return clearName;
+  const clearName = name.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  return clearName;
 };
 
 const createTags = (arr) => {
-    const badges = arr.map(item => `<span class="badge badge-soft border-warning badge-warning text-xs rounded-full">${item}</span>`);
-    return (badges.join(" "));
+  const badges = arr.map(item => `<span class="badge badge-soft border-warning badge-warning text-xs rounded-full">${item}</span>`);
+  return (badges.join(" "));
 }
 
 const manageLoading = (status) => {
-    if (status == true) {
-        loadingSpinner.classList.remove("hidden");
-        issueContainer.innerHTML = "";
-    } else {
-        loadingSpinner.classList.add("hidden");
-    }
+  if (status == true) {
+    loadingSpinner.classList.remove("hidden");
+    issueContainer.innerHTML = "";
+  } else {
+    loadingSpinner.classList.add("hidden");
+  }
 };
 
 const toggleActiveBtn = () => {
-    const allToggleBtn = document.querySelectorAll(".toggleBtn");
-    allToggleBtn.forEach(btn => btn.classList.add("btn-outline"));
+  const allToggleBtn = document.querySelectorAll(".toggleBtn");
+  allToggleBtn.forEach(btn => btn.classList.add("btn-outline"));
 
 }
 
 const issueLoader = async () => {
-    manageLoading(true);
-    const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
-    const data = await res.json();
-    manageLoading(false);
-    // console.log(data.data);
-    allIssues = data.data;
-    displayIssus(allIssues);
+  manageLoading(true);
+  const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const data = await res.json();
+  manageLoading(false);
+  // console.log(data.data);
+  allIssues = data.data;
+  displayIssus(allIssues);
 }
 
 const searchIssuesLoader = async (value) => {
-    manageLoading(true);
-    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`);
-    const data = await res.json();
-    manageLoading(false);
-    // console.log(data);
-    searchIssues = data.data
-    // console.log(searchIssues);
-    displayIssus(searchIssues)
-    issueCount.innerText = searchIssues.length;
+  manageLoading(true);
+  const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`);
+  const data = await res.json();
+  manageLoading(false);
+  // console.log(data);
+  searchIssues = data.data
+  // console.log(searchIssues);
+  displayIssus(searchIssues)
+  issueCount.innerText = searchIssues.length;
 
 
 }
 
 searchBtn.addEventListener("click", () => {
-    searchIssuesLoader(searchInput.value);
-    toggleActiveBtn();
-    // console.log(searchInput.value);
-    searchInput.value = "";
+  searchIssuesLoader(searchInput.value);
+  toggleActiveBtn();
+  // console.log(searchInput.value);
+  searchInput.value = "";
 
 })
 
 const selectedCardDetails = async (id) => {
-    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
-    const data = await res.json();
-    // console.log(data.data);
-    const details = data.data
-    issueModal.showModal();
-    modalTitle.innerText = details.title;
-    modalStatus.innerText = details.status;
-    modalStatus.classList.remove("badge-success", "badge-secondary");
-    details.status === "open" ? modalStatus.classList.add('badge-success') : modalStatus.classList.add('badge-secondary');
-    modalOwned.innerText = formatName(details.author);
-    modalDate.innerText = new Date(details.createdAt).toLocaleDateString();
-    modalBadge.innerHTML = `${createTags(details.labels)}`;
-    modalDescription.innerText = details.description;
-    details.assignee ? modalAssignee.innerText =formatName(details.assignee) :modalAssignee.innerText = "Unassigned";
-    modalPriority.innerText = details.priority.toUpperCase();
-    modalPriority.classList.remove('badge-error', 'badge-warning', 'badge-info')
-    details.priority == 'high' ? modalPriority.classList.add('badge-error') : details.priority == 'medium' ? modalPriority.classList.add('badge-warning') : modalPriority.classList.add('badge-info');
+  const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+  const data = await res.json();
+  // console.log(data.data);
+  const details = data.data
+  issueModal.showModal();
+  modalTitle.innerText = details.title;
+  modalStatus.innerText = details.status;
+  modalStatus.classList.remove("badge-success", "badge-secondary");
+  details.status === "open" ? modalStatus.classList.add('badge-success') : modalStatus.classList.add('badge-secondary');
+  modalOwned.innerText = formatName(details.author);
+  modalDate.innerText = new Date(details.createdAt).toLocaleDateString();
+  modalBadge.innerHTML = `${createTags(details.labels)}`;
+  modalDescription.innerText = details.description;
+  details.assignee ? modalAssignee.innerText = formatName(details.assignee) : modalAssignee.innerText = "Unassigned";
+  modalPriority.innerText = details.priority.toUpperCase();
+  modalPriority.classList.remove('badge-error', 'badge-warning', 'badge-info')
+  details.priority == 'high' ? modalPriority.classList.add('badge-error') : details.priority == 'medium' ? modalPriority.classList.add('badge-warning') : modalPriority.classList.add('badge-info');
 
 
 }
 
 const displayIssus = (data) => {
-    issueContainer.innerHTML = "";
-    data.forEach(issue => {
-        const card = document.createElement('div');
-        card.onclick = () => selectedCardDetails(issue.id);
-        card.className = `card bg-base-100 shadow-md border-t-4 ${issue.status == 'open' ? 'border-green-500' : 'border-purple-600'} p-4 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-xl active:scale-95`;
+  issueContainer.innerHTML = "";
+  data.forEach(issue => {
+    const card = document.createElement('div');
+    card.onclick = () => selectedCardDetails(issue.id);
+    card.className = `card bg-base-100 shadow-md border-t-4 ${issue.status == 'open' ? 'border-green-500' : 'border-purple-600'} p-4 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-xl active:scale-95`;
 
-        card.innerHTML = `
+    card.innerHTML = `
               <div class="flex justify-between items-start">
              <img src="${issue.status == 'open' ? './assets/Open-Status.png' : './assets/Closed- Status .png'}" class="w-6 h-6" alt="status" />
 
@@ -155,9 +155,9 @@ const displayIssus = (data) => {
           </div>
 
     `;
-        issueContainer.append(card);
+    issueContainer.append(card);
 
-    });
+  });
 
 
 }
@@ -165,24 +165,27 @@ const displayIssus = (data) => {
 
 
 separatorBtn.addEventListener("click", (e) => {
-    // console.log(e.target);
-    toggleActiveBtn();
-    e.target.classList.remove("btn-outline");
-
+  // console.log(e.target);
+  toggleActiveBtn();
+  e.target.classList.remove("btn-outline");
+  manageLoading(true)
+  setTimeout(() => {
     if (e.target === allBtn) {
-        displayIssus(allIssues);
-        issueCount.innerText = allIssues.length;
+      displayIssus(allIssues);
+      issueCount.innerText = allIssues.length;
     } else if (e.target === openBtn) {
-        const openIssues = allIssues.filter(issue => issue.status === "open");
-        // console.log("open", openIssues);
-        issueCount.innerText = openIssues.length;
-        displayIssus(openIssues);
+      const openIssues = allIssues.filter(issue => issue.status === "open");
+      // console.log("open", openIssues);
+      issueCount.innerText = openIssues.length;
+      displayIssus(openIssues);
     } else if (e.target === closeBtn) {
-        const closedIssues = allIssues.filter(issue => issue.status === "closed");
-        issueCount.innerText = closedIssues.length;
-        displayIssus(closedIssues);
-        // console.log("open", closedIssues);
+      const closedIssues = allIssues.filter(issue => issue.status === "closed");
+      issueCount.innerText = closedIssues.length;
+      displayIssus(closedIssues);
+      // console.log("open", closedIssues);
     }
+    manageLoading(false);
+  }, 500);
 
 })
 

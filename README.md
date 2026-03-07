@@ -16,6 +16,6 @@
 
 - 5️⃣ What are template literals?
 
-- >template literals is a way in js to create a string and and it can dynamically embed  variable inside string like i am ${name}.
+- >template literals is a way in js to create a string and and it can dynamically embed  variable inside string like, i am ${name}.
 
 
