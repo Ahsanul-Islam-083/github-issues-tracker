@@ -1,3 +1,8 @@
+# Visite👇
+# [GitHub Issue Tracker](https://issue-tracker-github.netlify.app/)
+
+
+
 - 1️⃣ What is the difference between var, let, and const?
 
 - >In JS var is function scoped and hoisted with a initial value of undefined so it can be accessed without and error before even declaring it and it can also be redeclare. On the other Hand let and const are block scoped and if we try to access it before declaration causes temporal dead zone error. but the difference is let can be redeclared but the const can't. however the elements of objects and arrays which are declared with const can be modified.
